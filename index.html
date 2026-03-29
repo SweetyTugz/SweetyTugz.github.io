@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sweety Tugnawat — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0c0f;
+    --bg2: #0f1318;
+    --bg3: #141920;
+    --panel: #111620;
+    --border: #1e2730;
+    --border2: #243040;
+    --green: #00ff87;
+    --green2: #00cc6a;
+    --green3: #00ff8733;
+    --cyan: #00d4ff;
+    --cyan2: #00aacf;
+    --cyan3: #00d4ff22;
+    --amber: #ffb800;
+    --red: #ff4466;
+    --purple: #b87fff;
+    --text: #e8edf2;
+    --text2: #8a9ab0;
+    --text3: #4a5a6a;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+    --glow-green: 0 0 20px #00ff8744, 0 0 60px #00ff8711;
+    --glow-cyan: 0 0 20px #00d4ff44, 0 0 60px #00d4ff11;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,135,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,135,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Scan lines */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,12,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--green);
+    letter-spacing: 0.05em;
+    text-shadow: var(--glow-green);
+  }
+
+  .nav-logo span { color: var(--text2); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text2);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-links a::before {
+    content: '> ';
+    color: var(--green3);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover::before { color: var(--green); }
+
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--green); }
+    50% { opacity: 0.5; box-shadow: 0 0 2px var(--green); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0 60px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-terminal {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0,255,135,0.05);
+  }
+
+  .terminal-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .t-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .t-dot.r { background: #ff5f56; }
+  .t-dot.y { background: #febc2e; }
+  .t-dot.g { background: #28c840; }
+
+  .terminal-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    margin-left: 8px;
+  }
+
+  .terminal-body {
+    padding: 24px 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .t-prompt { color: var(--text3); }
+  .t-cmd { color: var(--cyan); }
+  .t-key { color: var(--text2); }
+  .t-val { color: var(--green); }
+  .t-str { color: var(--amber); }
+  .t-comment { color: var(--text3); font-style: italic; }
+  .t-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--green);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .hero-content {}
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+  }
+
+  h1 .name-main { color: var(--text); }
+  h1 .name-accent {
+    color: var(--green);
+    text-shadow: var(--glow-green);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--text2);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-subtitle strong { color: var(--cyan); font-weight: 500; }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2.5rem;
+  }
+
+  .badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    border: 1px solid;
+  }
+
+  .badge.green { color: var(--green); border-color: var(--green3); background: rgba(0,255,135,0.05); }
+  .badge.cyan { color: var(--cyan); border-color: var(--cyan3); background: rgba(0,212,255,0.05); }
+  .badge.amber { color: var(--amber); border-color: rgba(255,184,0,0.2); background: rgba(255,184,0,0.05); }
+  .badge.purple { color: var(--purple); border-color: rgba(184,127,255,0.2); background: rgba(184,127,255,0.05); }
+
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: none;
+  }
+
+  .btn-primary {
+    color: var(--bg);
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .btn-primary:hover {
+    background: var(--green2);
+    box-shadow: var(--glow-green);
+  }
+
+  .btn-secondary {
+    color: var(--cyan);
+    border-color: var(--cyan3);
+    background: rgba(0,212,255,0.05);
+  }
+  .btn-secondary:hover {
+    background: rgba(0,212,255,0.1);
+    border-color: var(--cyan);
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+  }
+
+  .section-tag::before {
+    content: '// ';
+    color: var(--green3);
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  h2 span { color: var(--green); }
+
+  .section-line {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), transparent);
+    margin-top: 12px;
+  }
+
+  /* ─── ABOUT ─── */
+  #about { padding: 100px 0; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 1.5rem;
+  }
+
+  .stat-box {
+    background: var(--panel);
+    padding: 1.2rem;
+  }
+
+  .stat-number {
+    font-family: var(--mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--green);
+    text-shadow: var(--glow-green);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* AI Interest Panel */
+  .ai-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--cyan), transparent);
+  }
+
+  .ai-panel-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .ai-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ai-node:last-child { border-bottom: none; }
+
+  .ai-node-icon {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--cyan);
+    min-width: 20px;
+    line-height: 1.6;
+  }
+
+  .ai-node-text {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .ai-node-text strong { color: var(--text); }
+
+  /* ─── EXPERIENCE ─── */
+  #experience { padding: 100px 0; background: var(--bg2); }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--green), var(--cyan), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.45rem;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    border: 2px solid var(--bg2);
+  }
+
+  .timeline-dot.cyan {
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+  }
+
+  .timeline-dot.amber {
+    background: var(--amber);
+    box-shadow: 0 0 8px var(--amber);
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .job-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .job-company {
+    color: var(--green);
+  }
+
+  .job-period {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .job-list {
+    list-style: none;
+    margin-top: 1rem;
+  }
+
+  .job-list li {
+    position: relative;
+    padding-left: 1.2rem;
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .job-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-size: 10px;
+    top: 3px;
+  }
+
+  .job-list li strong { color: var(--text); font-weight: 500; }
+
+  .highlight-chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--cyan);
+    background: var(--cyan3);
+    border: 1px solid rgba(0,212,255,0.2);
+    margin: 2px 2px 0 0;
+    vertical-align: middle;
+  }
+
+  /* ─── SKILLS ─── */
+  #skills { padding: 100px 0; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .skill-card.g::before { background: linear-gradient(90deg, var(--green), transparent); }
+  .skill-card.c::before { background: linear-gradient(90deg, var(--cyan), transparent); }
+  .skill-card.a::before { background: linear-gradient(90deg, var(--amber), transparent); }
+  .skill-card.p::before { background: linear-gradient(90deg, var(--purple), transparent); }
+
+  .skill-card:hover { border-color: var(--border2); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+  .skill-card:hover::before { opacity: 1; }
+
+  .skill-card-icon {
+    font-family: var(--mono);
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .skill-card.g .skill-card-icon { color: var(--green); }
+  .skill-card.c .skill-card-icon { color: var(--cyan); }
+  .skill-card.a .skill-card-icon { color: var(--amber); }
+  .skill-card.p .skill-card-icon { color: var(--purple); }
+
+  .skill-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .skill-card:hover .skill-tag { color: var(--text); }
+
+  /* ─── PROJECTS ─── */
+  #projects { padding: 100px 0; background: var(--bg2); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.8rem;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+
+  .project-card.featured {
+    grid-column: span 2;
+    border-color: rgba(0,255,135,0.15);
+  }
+
+  .project-card.featured:hover { border-color: rgba(0,255,135,0.3); }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .project-icon {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--green);
+  }
+
+  .project-card.featured .project-icon { color: var(--cyan); }
+
+  .project-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--green);
+    background: var(--green3);
+    border: 1px solid rgba(0,255,135,0.2);
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .project-label.ai {
+    color: var(--cyan);
+    background: var(--cyan3);
+    border-color: rgba(0,212,255,0.2);
+  }
+
+  .project-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  .project-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tech-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 7px;
+    border-radius: 3px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── AI SECTION ─── */
+  #ai-focus { padding: 100px 0; }
+
+  .ai-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .ai-visual {
+    position: relative;
+  }
+
+  .agent-diagram {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.8;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .agent-diagram::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,255,135,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ad-title {
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ad-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .ad-layer {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+
+  .ad-layer-icon { font-size: 14px; }
+
+  .ad-layer-label { color: var(--text); font-weight: 500; font-size: 11px; }
+  .ad-layer-sub { color: var(--text3); font-size: 9px; margin-top: 1px; }
+
+  .ad-arrow {
+    text-align: center;
+    color: var(--text3);
+    font-size: 10px;
+    margin: 2px 0;
+  }
+
+  .ad-layer.active { border-color: rgba(0,255,135,0.3); }
+  .ad-layer.active .ad-layer-icon { filter: drop-shadow(0 0 4px var(--green)); }
+
+  .ai-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-content h3 span { color: var(--green); }
+
+  .ai-content p {
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 1rem;
+    font-size: 14px;
+  }
+
+  .ai-interest-list {
+    list-style: none;
+    margin-top: 1.5rem;
+  }
+
+  .ai-interest-list li {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .ai-interest-list li:last-child { border-bottom: none; }
+
+  .ai-li-icon { color: var(--green); font-family: var(--mono); font-size: 12px; min-width: 20px; }
+  .ai-li-text { color: var(--text2); }
+  .ai-li-text strong { color: var(--text); }
+
+  /* ─── CONTACT ─── */
+  #contact { padding: 100px 0; background: var(--bg2); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-info p {
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    font-size: 14px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--panel);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .contact-link:hover { background: var(--bg3); }
+
+  .cl-icon {
+    font-family: var(--mono);
+    font-size: 14px;
+    width: 20px;
+    text-align: center;
+  }
+
+  .cl-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    min-width: 70px;
+  }
+
+  .cl-value {
+    font-size: 13px;
+    color: var(--text2);
+    flex: 1;
+  }
+
+  .cl-arrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    transition: color 0.15s, transform 0.15s;
+  }
+
+  .contact-link:hover .cl-arrow { color: var(--green); transform: translateX(3px); }
+
+  /* Cert card */
+  .cert-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .cert-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.2rem;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cert-item:last-child { border-bottom: none; }
+
+  .cert-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .cert-badge.aws { background: rgba(255,184,0,0.1); border: 1px solid rgba(255,184,0,0.2); }
+  .cert-badge.gold { background: rgba(255,184,0,0.08); border: 1px solid rgba(255,184,0,0.15); }
+  .cert-badge.google { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15); }
+  .cert-badge.hack { background: rgba(0,255,135,0.08); border: 1px solid rgba(0,255,135,0.15); }
+
+  .cert-name { font-size: 13px; color: var(--text); font-weight: 500; }
+  .cert-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  .footer-text span { color: var(--green); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero-grid, .about-grid, .ai-grid, .contact-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    nav .nav-links { display: none; }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.6rem; }
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ST<span>://</span>sweety.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#ai-focus">AI Focus</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    OPEN TO OPPORTUNITIES
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">Software Engineer</div>
+        <h1>
+          <span class="name-main">Sweety</span><br>
+          <span class="name-accent">Tugnawat</span>
+        </h1>
+        <p class="hero-subtitle">
+          Building <strong>secure, intelligent systems</strong> at the intersection of<br>
+          financial engineering, AI tooling &amp; agentic workflows.
+        </p>
+        <div class="hero-badges">
+          <span class="badge green">Java / Spring Boot</span>
+          <span class="badge cyan">GenAI &amp; Agentic AI</span>
+          <span class="badge amber">AWS AI Practitioner</span>
+          <span class="badge purple">Quantum Computing</span>
+          <span class="badge green">MSc Comp Science</span>
+          <span class="badge cyan">London, UK</span>
+        </div>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Get In Touch ↗</a>
+          <a href="#experience" class="btn btn-secondary">View Experience →</a>
+        </div>
+      </div>
+      <div class="hero-terminal">
+        <div class="terminal-bar">
+          <div class="t-dot r"></div>
+          <div class="t-dot y"></div>
+          <div class="t-dot g"></div>
+          <span class="terminal-title">sweety@dev ~ profile.json</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-prompt">$ </span><span class="t-cmd">cat</span> profile.json</div>
+          <div>&nbsp;</div>
+          <div>{</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-str">"Sweety Tugnawat"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"Software Engineer"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-str">"London, UK 🇬🇧"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"experience"</span>: <span class="t-val">6</span>,<span class="t-comment"> // years</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"focus"</span>: [</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"Agentic AI"</span>,</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"GenAI Tooling"</span>,</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"Microservices"</span>,</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"Security Engineering"</span></div>
+          <div>&nbsp;&nbsp;],</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"certified"</span>: <span class="t-str">"AWS AI Practitioner"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"status"</span>: <span class="t-val">true</span> <span class="t-comment">// open_to_work</span></div>
+          <div>}</div>
+          <div>&nbsp;</div>
+          <div><span class="t-prompt">$ </span><span class="t-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <div class="section-header">
+          <div class="section-tag">about_me</div>
+          <h2>Who I <span>Am</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <p>
+          I'm a <strong>security-conscious Software Engineer</strong> with 6+ years building production-grade systems in the financial services sector. I specialise in Java/Spring Boot microservices, CI/CD pipeline engineering, and quality automation.
+        </p>
+        <p>
+          Currently at <strong>Discover Financial Services (UK)</strong>, I've architected regression suites that eliminated cross-team data dependencies, deployed AI-powered internal tooling, and maintained a zero-debt security posture across 23+ RESTful microservices.
+        </p>
+        <p>
+          I hold an <strong>MSc in Advanced Computer Science</strong> from the University of Hertfordshire and an <strong>AWS Certified AI Practitioner</strong> certification — and I'm actively exploring the frontier of <strong>Agentic AI systems</strong>.
+        </p>
+        <div class="about-stats">
+          <div class="stat-box">
+            <div class="stat-number">23+</div>
+            <div class="stat-label">Production Microservices</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">80%</div>
+            <div class="stat-label">Flakiness Reduction</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">75ms</div>
+            <div class="stat-label">API Response (from 290ms)</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-panel fade-up">
+        <div class="ai-panel-title">// AI &amp; Agentic Interests</div>
+
+        <div class="ai-node">
+          <div class="ai-node-icon">⟳</div>
+          <div class="ai-node-text"><strong>Agentic AI Systems</strong> — Multi-agent orchestration, LLM-driven workflows and autonomous task execution pipelines.</div>
+        </div>
+        <div class="ai-node">
+          <div class="ai-node-icon">◈</div>
+          <div class="ai-node-text"><strong>GenAI Tooling</strong> — Built and deployed an internal GenAI-powered chatbot for developer onboarding at Discover Financial.</div>
+        </div>
+        <div class="ai-node">
+          <div class="ai-node-icon">⚛</div>
+          <div class="ai-node-text"><strong>Quantum Computing</strong> — Hands-on experience with Qiskit; exploring quantum-classical hybrid approaches.</div>
+        </div>
+        <div class="ai-node">
+          <div class="ai-node-icon">◎</div>
+          <div class="ai-node-text"><strong>AI-Augmented Engineering</strong> — Integrating AI into CI/CD pipelines, DoD automation, and intelligent quality gates.</div>
+        </div>
+        <div class="ai-node">
+          <div class="ai-node-icon">⟐</div>
+          <div class="ai-node-text"><strong>AWS AI Services</strong> — Certified practitioner with focus on building secure, production-ready AI on cloud infrastructure.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">career_timeline</div>
+      <h2>Professional <span>Experience</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-dot"></div>
+        <div class="job-header">
+          <div>
+            <div class="job-title">Software Engineer <span class="job-company">@ Discover Financial Services</span></div>
+          </div>
+          <div class="job-period">08/2022 — Present</div>
+        </div>
+        <ul class="job-list">
+          <li>
+            <strong>AI Tooling:</strong> Developed and deployed an internal <strong>GenAI-powered chatbot</strong> to streamline engineer onboarding, providing instant access to technical documentation on internal services and component architecture.
+            <span class="highlight-chip">GenAI</span><span class="highlight-chip">LLM</span>
+          </li>
+          <li>
+            <strong>Regression Architecture:</strong> Engineered a modular testing framework using <strong>Playwright</strong> that eliminated cross-team data dependencies via localised data injection and state-mocking — reducing test flakiness by <strong>80%</strong>.
+            <span class="highlight-chip">Playwright</span><span class="highlight-chip">CI/CD</span>
+          </li>
+          <li>
+            <strong>Security Governance:</strong> Maintained a "zero-debt" SonarQube posture with deep-dive static analysis; managed software supply chain integrity via <strong>Sonatype Nexus</strong>.
+            <span class="highlight-chip">SonarQube</span>
+          </li>
+          <li>
+            <strong>DoD Automation:</strong> Automated Definition of Done compliance checks within CI/CD pipelines — ensuring every PR meets strict security, documentation, and testing benchmarks.
+          </li>
+          <li>
+            <strong>Performance Engineering:</strong> Conducted high-volume stress testing with <strong>Gatling</strong>; optimised API response times from 290ms → 75ms and query latency from 25ms → 5ms.
+            <span class="highlight-chip">Gatling</span>
+          </li>
+          <li>
+            <strong>System Modernisation:</strong> Designed 23+ production RESTful microservices using <strong>Java &amp; Spring Boot</strong> with retry mechanisms and transactional workflows.
+          </li>
+          <li>
+            <strong>Scrum Master (informal):</strong> Led Scrum ceremonies for a team of 8, tracking sprint velocity and removing blockers to maintain delivery cadence.
+          </li>
+        </ul>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-dot cyan"></div>
+        <div class="job-header">
+          <div>
+            <div class="job-title">Business Technology Intern <span class="job-company">@ Discover Financial Services</span></div>
+          </div>
+          <div class="job-period">06/2021 — 08/2021</div>
+        </div>
+        <ul class="job-list">
+          <li>Enhanced the <strong>Release Tracker Dashboard</strong> with data visualisation providing real-time transparency into Sprint lifecycle and deployment velocity.</li>
+          <li>Designed and implemented administrative functionalities within the release management tool using <strong>Agile Scrum</strong> methodologies.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-dot amber"></div>
+        <div class="job-header">
+          <div>
+            <div class="job-title">Software Engineer <span class="job-company">@ Accenture Services Pvt. Ltd.</span></div>
+          </div>
+          <div class="job-period">11/2018 — 01/2021</div>
+        </div>
+        <ul class="job-list">
+          <li>
+            <strong>Integration Engineering:</strong> Developed SOA-based processes in <strong>TIBCO BusinessWorks</strong> for Carphone Warehouse, integrating multi-vendor products for touchless customer onboarding.
+            <span class="highlight-chip">TIBCO</span>
+          </li>
+          <li>
+            <strong>Security Scripting:</strong> Automated SSL/TLS certificate expiry monitoring across production environments using <strong>Python &amp; shell scripts</strong> — preventing critical service downtime.
+          </li>
+          <li>Built internal analytical tools transforming raw data into actionable insights on operational efficiency and customer acquisition metrics.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">tech_stack</div>
+      <h2>Skills &amp; <span>Technologies</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card g fade-up">
+        <div class="skill-card-icon">&lt;/&gt;</div>
+        <div class="skill-card-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Java (Core)</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">PL/SQL</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">SWI-Prolog</span>
+        </div>
+      </div>
+
+      <div class="skill-card c fade-up">
+        <div class="skill-card-icon">⬡</div>
+        <div class="skill-card-title">Frameworks &amp; APIs</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">Spring Framework</span>
+          <span class="skill-tag">GraphQL</span>
+          <span class="skill-tag">JUnit5</span>
+          <span class="skill-tag">Cucumber</span>
+          <span class="skill-tag">Gatling</span>
+          <span class="skill-tag">Kafka</span>
+          <span class="skill-tag">Playwright</span>
+        </div>
+      </div>
+
+      <div class="skill-card a fade-up">
+        <div class="skill-card-icon">⚙</div>
+        <div class="skill-card-title">DevOps &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Jenkins</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">SonarQube</span>
+          <span class="skill-tag">Nexus</span>
+          <span class="skill-tag">Oracle DB</span>
+          <span class="skill-tag">TIBCO</span>
+          <span class="skill-tag">WebSphere</span>
+          <span class="skill-tag">Hackolade</span>
+        </div>
+      </div>
+
+      <div class="skill-card p fade-up">
+        <div class="skill-card-icon">◈</div>
+        <div class="skill-card-title">AI &amp; Specialised</div>
+        <div class="skill-tags">
+          <span class="skill-tag">GenAI / LLMs</span>
+          <span class="skill-tag">Agentic AI</span>
+          <span class="skill-tag">AWS AI</span>
+          <span class="skill-tag">Qiskit</span>
+          <span class="skill-tag">Quantum Computing</span>
+          <span class="skill-tag">Hopscotch</span>
+        </div>
+      </div>
+
+      <div class="skill-card g fade-up">
+        <div class="skill-card-icon">◎</div>
+        <div class="skill-card-title">Architecture &amp; Process</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Microservices</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">SOA</span>
+          <span class="skill-tag">Agile/Scrum</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Test Automation</span>
+        </div>
+      </div>
+
+      <div class="skill-card c fade-up">
+        <div class="skill-card-icon">⊞</div>
+        <div class="skill-card-title">Security &amp; Quality</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Static Analysis</span>
+          <span class="skill-tag">DoD Automation</span>
+          <span class="skill-tag">Dependency Mgmt</span>
+          <span class="skill-tag">Performance Testing</span>
+          <span class="skill-tag">SSL/TLS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">notable_work</div>
+      <h2>Projects &amp; <span>Builds</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card featured fade-up">
+        <div class="project-header">
+          <div class="project-icon">⟳</div>
+          <span class="project-label ai">AI / GenAI</span>
+        </div>
+        <div class="project-title">Internal GenAI Developer Onboarding Chatbot</div>
+        <div class="project-desc">
+          Designed and deployed a production-grade GenAI-powered chatbot at Discover Financial Services to solve the "knowledge cliff" for new engineers. The bot provides instant, accurate answers about internal service architecture, API contracts, and component ownership — reducing onboarding time and dependency on senior engineers. Integrated with internal documentation pipelines and deployed on AWS infrastructure.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">GenAI</span>
+          <span class="tech-tag">LLMs</span>
+          <span class="tech-tag">AWS</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Internal APIs</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-header">
+          <div class="project-icon">◎</div>
+          <span class="project-label">Automation</span>
+        </div>
+        <div class="project-title">Standalone Playwright Regression Suite</div>
+        <div class="project-desc">
+          Architected a fully modular, self-contained E2E and API test framework using Playwright — eliminating cross-team data dependencies through localised state-mocking. Achieved 80% reduction in test flakiness and full CI/CD integration with automated execution on every build.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Playwright</span>
+          <span class="tech-tag">Jenkins</span>
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">CI/CD</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-header">
+          <div class="project-icon">⚙</div>
+          <span class="project-label">DevOps</span>
+        </div>
+        <div class="project-title">Automated DoD Compliance Pipeline</div>
+        <div class="project-desc">
+          Streamlined the Definition of Done by embedding automated compliance gates into the CI/CD pipeline — ensuring every pull request meets security, documentation, and testing benchmarks before merge. Removed the human bottleneck from compliance verification entirely.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Jenkins</span>
+          <span class="tech-tag">SonarQube</span>
+          <span class="tech-tag">Scripting</span>
+          <span class="tech-tag">Git</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-header">
+          <div class="project-icon">⚛</div>
+          <span class="project-label ai">Quantum</span>
+        </div>
+        <div class="project-title">Quantum Computing Exploration (Qiskit)</div>
+        <div class="project-desc">
+          Hands-on exploration of quantum algorithms using IBM's Qiskit framework. Investigating quantum-classical hybrid approaches and their potential application in financial optimisation and cryptographic problems — bridging academic research with practical engineering.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Qiskit</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">IBM Quantum</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-header">
+          <div class="project-icon">◈</div>
+          <span class="project-label">Performance</span>
+        </div>
+        <div class="project-title">Financial Microservices Performance Overhaul</div>
+        <div class="project-desc">
+          Led performance engineering initiative across critical financial transaction paths using Gatling. Optimised API response times from 290ms to 75ms and DB query execution from 25ms to 5ms through targeted query tuning, indexing, and payload restructuring.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Gatling</span>
+          <span class="tech-tag">Oracle DB</span>
+          <span class="tech-tag">Spring Boot</span>
+          <span class="tech-tag">Java</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-header">
+          <div class="project-icon">⟐</div>
+          <span class="project-label">Integration</span>
+        </div>
+        <div class="project-title">TIBCO SOA Integration — Carphone Warehouse</div>
+        <div class="project-desc">
+          Developed SOA-based integration processes in TIBCO BusinessWorks, connecting multi-vendor systems to deliver a touchless customer onboarding journey. Also built automated SSL/TLS certificate monitoring scripts preventing production outages.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">TIBCO</span>
+          <span class="tech-tag">SOA</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Shell</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI FOCUS -->
+<section id="ai-focus">
+  <div class="container">
+    <div class="ai-grid">
+      <div class="ai-visual fade-up">
+        <div class="section-header" style="margin-bottom:1.5rem">
+          <div class="section-tag">agentic_ai</div>
+          <h2>AI &amp; <span>Agentic</span> Systems</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="agent-diagram">
+          <div class="ad-title">AGENTIC AI STACK</div>
+
+          <div class="ad-layer active">
+            <div class="ad-layer-icon" style="color:var(--cyan)">⟳</div>
+            <div>
+              <div class="ad-layer-label">Orchestration Layer</div>
+              <div class="ad-layer-sub">Agent loop · Task planning · Goal decomposition</div>
+            </div>
+          </div>
+
+          <div class="ad-arrow">↓</div>
+
+          <div class="ad-layer">
+            <div class="ad-layer-icon" style="color:var(--green)">◈</div>
+            <div>
+              <div class="ad-layer-label">LLM Reasoning Core</div>
+              <div class="ad-layer-sub">Prompt engineering · Context management · Tool use</div>
+            </div>
+          </div>
+
+          <div class="ad-arrow">↓</div>
+
+          <div class="ad-layer">
+            <div class="ad-layer-icon" style="color:var(--amber)">⚙</div>
+            <div>
+              <div class="ad-layer-label">Tool &amp; API Layer</div>
+              <div class="ad-layer-sub">RAG · External APIs · Database access</div>
+            </div>
+          </div>
+
+          <div class="ad-arrow">↓</div>
+
+          <div class="ad-layer">
+            <div class="ad-layer-icon" style="color:var(--purple)">◎</div>
+            <div>
+              <div class="ad-layer-label">Memory &amp; State</div>
+              <div class="ad-layer-sub">Vector store · Short/long term memory · Session context</div>
+            </div>
+          </div>
+
+          <div class="ad-arrow">↓</div>
+
+          <div class="ad-layer">
+            <div class="ad-layer-icon" style="color:var(--red)">⊞</div>
+            <div>
+              <div class="ad-layer-label">Security &amp; Guardrails</div>
+              <div class="ad-layer-sub">Input validation · Output filtering · Audit logging</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-content fade-up">
+        <h3>Bridging <span>AI</span> with Production Engineering</h3>
+        <p>My interest in Agentic AI stems from a practical engineering perspective — how do we build systems where AI agents can autonomously execute complex, multi-step tasks reliably and securely?</p>
+        <p>With a background in financial services engineering, I bring a security-first lens to AI system design — ensuring agents operate within defined boundaries, with full auditability.</p>
+
+        <ul class="ai-interest-list">
+          <li>
+            <span class="ai-li-icon">▸</span>
+            <span class="ai-li-text"><strong>Multi-agent orchestration</strong> — Designing agent hierarchies where specialised sub-agents collaborate on complex tasks under a supervisor agent.</span>
+          </li>
+          <li>
+            <span class="ai-li-icon">▸</span>
+            <span class="ai-li-text"><strong>RAG pipelines</strong> — Building retrieval-augmented generation systems for domain-specific knowledge access, as demonstrated with the internal developer chatbot.</span>
+          </li>
+          <li>
+            <span class="ai-li-icon">▸</span>
+            <span class="ai-li-text"><strong>AI-native CI/CD</strong> — Integrating intelligent agents into development pipelines for automated code review, security scanning, and quality gating.</span>
+          </li>
+          <li>
+            <span class="ai-li-icon">▸</span>
+            <span class="ai-li-text"><strong>Quantum-AI hybrids</strong> — Exploring Qiskit-based algorithms for problems where quantum advantage complements classical AI models.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">get_in_touch</div>
+      <h2>Let's <span>Connect</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <p>I'm open to senior engineering roles, AI/ML-adjacent engineering positions, and conversations about agentic systems, GenAI tooling, and quantum computing. Based in London.</p>
+        <div class="contact-links">
+          <a href="mailto:sweettugz@gmail.com" class="contact-link">
+            <span class="cl-icon" style="color:var(--green)">@</span>
+            <span class="cl-label">Email</span>
+            <span class="cl-value">sweettugz@gmail.com</span>
+            <span class="cl-arrow">→</span>
+          </a>
+          <a href="https://linkedin.com/in/sweetytugnawat" target="_blank" class="contact-link">
+            <span class="cl-icon" style="color:var(--cyan)">in</span>
+            <span class="cl-label">LinkedIn</span>
+            <span class="cl-value">linkedin.com/in/sweetytugnawat</span>
+            <span class="cl-arrow">→</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span class="cl-icon" style="color:var(--purple)">◎</span>
+            <span class="cl-label">Location</span>
+            <span class="cl-value">London, UK</span>
+            <span class="cl-arrow">→</span>
+          </a>
+          <a href="tel:+447436567692" class="contact-link">
+            <span class="cl-icon" style="color:var(--amber)">✆</span>
+            <span class="cl-label">Phone</span>
+            <span class="cl-value">+44 7436 567692</span>
+            <span class="cl-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="cert-panel fade-up">
+        <div class="cert-title">// Certifications &amp; Achievements</div>
+
+        <div class="cert-item">
+          <div class="cert-badge aws">☁</div>
+          <div>
+            <div class="cert-name">AWS Certified AI Practitioner</div>
+            <div class="cert-sub">Amazon Web Services · Foundational</div>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-badge">🎓</div>
+          <div>
+            <div class="cert-name">MSc Advanced Computer Science</div>
+            <div class="cert-sub">University of Hertfordshire, UK · 2021–2022</div>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-badge gold">🏅</div>
+          <div>
+            <div class="cert-name">Gold Medal — National Basketball</div>
+            <div class="cert-sub">National-level Tournament Winner</div>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-badge google">G</div>
+          <div>
+            <div class="cert-name">Google Student Ambassador</div>
+            <div class="cert-sub">Two consecutive years · Leadership</div>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-badge hack">⚡</div>
+          <div>
+            <div class="cert-name">Hackathon Winner</div>
+            <div class="cert-sub">Inter-college Fest · Competition</div>
+          </div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-badge" style="background:rgba(184,127,255,0.08);border:1px solid rgba(184,127,255,0.15)">♀</div>
+          <div>
+            <div class="cert-name">Women in Tech UK</div>
+            <div class="cert-sub">Active Community Member</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-text">
+    <span>Sweety Tugnawat</span> · Built with HTML/CSS/JS · Hosted on GitHub Pages
+  </div>
+  <div class="footer-text">
+    <span>status:</span> open_to_work = <span>true</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
